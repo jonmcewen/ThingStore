@@ -1,51 +1,76 @@
 package com.macotter.thingstore.entities;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "THING")
+@Table(name = "THINGS")
 public class Thing {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "THING_ID")
-	Integer thingId;
+	private final ThingKey thingKey = new ThingKey();
 
-	@Column(name = "TITLE")
-	String title;
-
-	@Column(name = "CREATE_DATE")
-	Date createDate;
-
-	public Integer getThingId() {
-		return thingId;
+	public String getUser() {
+		return thingKey.getUser();
 	}
 
-	public void setThingId(Integer thingId) {
-		this.thingId = thingId;
+	public void setUser(String user) {
+		this.thingKey.setUser(user);
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return thingKey.getName();
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.thingKey.setName(name);
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Thing [thingKey=" + thingKey + "]";
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((thingKey == null) ? 0 : thingKey.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Thing other = (Thing) obj;
+		if (thingKey == null) {
+			if (other.thingKey != null)
+				return false;
+		} else if (!thingKey.equals(other.thingKey))
+			return false;
+		return true;
 	}
 
 }
